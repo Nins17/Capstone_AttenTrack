@@ -27,8 +27,8 @@
       <!-- partial:partials/_navbar.html -->
       <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-          <a class="navbar-brand brand-logo gradient-primary" href="index.html">AttenTrack</a>
-          <a class="navbar-brand brand-logo-mini" href="index.html"><img src="../static/assets/images/logo-mini.svg" alt="logo" /></a>
+          <a class="navbar-brand brand-logo gradient-primary text-decoration-none font-weight-bold" href="index.html"><img src="{{url_for('static',filename='assets/images/logo.png')}}" style="width:70px;height:70px;padding:20px;" alt="logo" />AttenTRACK AMS</a>
+
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-stretch">
           <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -37,20 +37,22 @@
 
           <ul class="navbar-nav navbar-nav-right">
             <li class="nav-item nav-profile dropdown">
+              {%for info in logged_teacher%}
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="../static/assets/images/faces/face1.jpg" alt="image">
+                  <img src="" alt="image">
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">
-                  <p class="mb-1 text-black">David Greymaax</p>
+                  <p class="mb-1 text-black">Teacher {{info[1]}}</p>
                 </div>
               </a>
+              {%endfor%}
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
                 <a class="dropdown-item" href="#">
                   <i class="mdi mdi-account-key me-2 text-success"></i> Profile </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/">
+                <a class="dropdown-item" href="/sign_out">
                   <i class="mdi mdi-logout me-2 text-primary"></i> Signout </a>
               </div>
             </li>
@@ -92,13 +94,13 @@
               <div class="collapse" id="icons">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/icons/font-awesome.html">Class Record</a>
+                    <a class="nav-link" href="pages/icons/font-awesome.html">Attendance Record</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="pages/icons/font-awesome.html">Student List</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="pages/icons/font-awesome.html">Schedule</a>
+                    <a class="nav-link" href="pages/icons/font-awesome.html">Schedules</a>
                   </li>
                 </ul>
               </div>
@@ -109,6 +111,13 @@
                 <i class="mdi mdi-calendar-check menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item">
+              <a  href="" class="nav-link" aria-expanded="false" aria-controls="tables">
+                  <span class="menu-title">Enroll Student</span>
+                  <i class="mdi mdi-account-plus menu-icon"></i>
+              </a> 
+            </li>
+            
           </ul>
         </nav>
         <!-- partial -->
@@ -126,10 +135,10 @@
               <div class="col-md-4 stretch-card grid-margin">
                 <div class="card  bg-gradient-primary card-img-holder text-white">
                   <img src="../static/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <a href="#" class="stretched-link"></a>
+                  <a href="/take_attendance" class="stretched-link"></a>
                   <div class="card-body">
                     <h3 class="font-weight-normal mb-3">
-                      CHECK <i class="mdi mdi-calendar-check mdi-24px float-end"></i>
+                      TAKE <i class="mdi mdi-calendar-check mdi-24px float-end"></i>
                     </h3>
                     <h2 class="mb-5">ATTENDANCE</h2>
                   </div>
@@ -139,25 +148,26 @@
               <div class="col-md-4 stretch-card grid-margin">
                 <div class="card green-gradient-1 card-img-holder text-white">
                   <img src="../static/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <a href="#" class="stretched-link"></a>
+                  <a  href="/enrollStudentform" class="stretched-link text-white text-decoration-none">
                   <div class="card-body">
                     <h4 class="font-weight-normal mb-3">
-                      VIEW <i class="mdi mdi-calendar-text mdi-24px float-end"></i>
+                      ADD <i class="mdi mdi-account-plus mdi-24px float-end"></i>
                     </h4>
-                    <h2 class="mb-5">CLASS RECORD</h2>
+                    <h2 class="mb-5">ENROLL STUDENT</h2>
                   </div>
+                </a>
                 </div>
               </div>
             
               <div class="col-md-4 stretch-card grid-margin">
-                <div class="card green-gradient-2 card-img-holder text-white">
+                <div class="card bg-gradient-primary card-img-holder text-white">
                   <img src="../static/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
-                  <a href="#" class="stretched-link"></a>
+                  <a href="/class_schedules" class="stretched-link"></a>
                   <div class="card-body">
                     <h4 class="font-weight-normal mb-3">
                       VIEW <i class="mdi mdi-calendar-today mdi-24px float-end"></i>
                     </h4>
-                    <h2 class="mb-5">SCHEDULE</h2>
+                    <h2 class="mb-5">CLASS SCHEDULE</h2>
                   </div>
                 </div>
               </div>
